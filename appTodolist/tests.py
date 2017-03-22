@@ -18,7 +18,6 @@ class TodoTest (TestCase):
         # assert
         self.assertTrue(len(t.get_tasks()) == 0)
 
-
     def test_add_task(self):
         '''
         add task, is empty,
@@ -32,7 +31,26 @@ class TodoTest (TestCase):
         tasks_list.add_task(task)
         # assert
         self.assertFalse(tasks_list.is_empty())
-
+    
+    def test_list(self):
+        # arrange
+        task_list = TaskList(name="Lista")
+        task_list.save()
+        
+        task1 = Task(name="Tarea1") 
+        task1.save()
+        task_list.add_task(task1)
+        
+        task2 = Task(name="Tarea2") 
+        task2.save()
+        task_list.add_task(task2)
+        
+        # act
+        t_list = task_list.get_tasks()
+        # assert
+        self.assertTrue(task1 in t_list)
+        self.assertTrue(task2 in t_list)
+        
 
 class TasksTest (TestCase):
 

@@ -15,7 +15,7 @@ class TaskList(models.Model):
         self.task_set.add(new_task)
     
     def get_tasks(self):
-        return Task.objects.filter(task_list=self)
+        return self.task_set.all()
     
 
 class Task(models.Model):
