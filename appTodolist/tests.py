@@ -2,59 +2,57 @@ from django.test import TestCase
 from appTodolist.models import Task, TaskList
 
 
-
 class TodoTest (TestCase):
-    
+
     def test_empty(self):
-        #arrange
+        # arrange
         t = TaskList()
-        #act
-        #assert
+        # act
+        # assert
         self.assertTrue(t.is_empty())
     
     def test_get_empty(self):
-        #arrange
+        # arrange
         t = TaskList()
-        #act
-        #assert
+        # act
+        # assert
         self.assertTrue(len(t.get_tasks()) == 0)
-        
+
     def test_add_task(self):
         '''
-        add task, is empty, 
+        add task, is empty,
         '''
-        #arrange
+        # arrange
         tasks_list = TaskList()
         task = Task(name="name!!")
-        #act
+        # act
         tasks_list.add_task(task)
-        #assert
+        # assert
         self.assertFalse(tasks_list.is_empty())
         self.assertEquals(1, tasks_list.size())
-        
-    
-    # def test_weird_encoding(self):
-    #     flag = False
-    #     #arrange
-    #     tasks_list = TaskList()
-    #     try:
-    #         task = Task(name="")
-    #     except:
-    #         flag = True
-    #     #act
-    #     tasks_list.add_task(task)
-    #     #assert
-    #     assertTrue(flag)
-    
-    '''
-    def test_list_tasks(self):
-        #arrange
-        t1 = Task.objects.create(name="Task 1")
-        t2 = Task.objects.create(name="Task 2")
-        t3 = Task.objects.create(name="Task 3")
-        #act
-        tasks = Task.objects.all()
-        #assert
-        self.assertEquals([t1, t2, t3], list(Task.objects.all()))
-        
-     '''
+
+
+class TasksTest (TestCase):
+
+    def test_name(self):
+        # arrange
+        name = "Name"
+        task = Task(name=name)
+        # act
+        # assert
+        self.assertEquals(name, task.name)
+
+    def test_pending(self):
+        # arrange
+        task = Task(name="Name")
+        # act
+        # assert
+        self.assertFalse(task.done)
+
+    def test_done(self):
+        # arrange
+        task = Task(name="Name")
+        # act
+        task.complete()
+        # assert
+        self.assertTrue(task.done)

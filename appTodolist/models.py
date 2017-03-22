@@ -22,3 +22,6 @@ class Task(models.Model):
     done = models.BooleanField(default=False)
     name = models.CharField(max_length=20)
     task_list = models.ForeignKey(TaskList, null=True)
+
+    def complete(self):
+        self.done = True
