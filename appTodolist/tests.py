@@ -11,13 +11,6 @@ class TodoTest (TestCase):
         #act
         #assert
         self.assertTrue(t.is_empty())
-    
-    def test_get_empty(self):
-        #arrange
-        t = TaskList()
-        #act
-        #assert
-        self.assertTrue(len(t.get_tasks()) == 0)
         
     def test_add_task(self):
         '''
@@ -25,36 +18,11 @@ class TodoTest (TestCase):
         '''
         #arrange
         tasks_list = TaskList()
+        tasks_list.save()
         task = Task(name="name!!")
+        task.save()
         #act
         tasks_list.add_task(task)
         #assert
         self.assertFalse(tasks_list.is_empty())
-        self.assertEquals(1, tasks_list.size())
         
-    
-    # def test_weird_encoding(self):
-    #     flag = False
-    #     #arrange
-    #     tasks_list = TaskList()
-    #     try:
-    #         task = Task(name="")
-    #     except:
-    #         flag = True
-    #     #act
-    #     tasks_list.add_task(task)
-    #     #assert
-    #     assertTrue(flag)
-    
-    '''
-    def test_list_tasks(self):
-        #arrange
-        t1 = Task.objects.create(name="Task 1")
-        t2 = Task.objects.create(name="Task 2")
-        t3 = Task.objects.create(name="Task 3")
-        #act
-        tasks = Task.objects.all()
-        #assert
-        self.assertEquals([t1, t2, t3], list(Task.objects.all()))
-        
-     '''
