@@ -4,19 +4,21 @@ from django.db import models
 
 # Create your models here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-'''
-class Task(models.Model):
-    
+
+class TaskList(models.Model):
     name = models.CharField(max_length=20)
     
-class TasksList(models.Model):
-    # https://docs.djangoproject.com/en/1.10/topics/db/models/
-    # models.oneToManyField(Task, )
-    
-    
     def is_empty(self):
-        return len(tasks.all()) < 1
+        return Task.objects.filter(task_list=self).count() < 1
     
-    def add_task(self):
+    def add_task(self, new_task):
+        pass
+    
+    def get_tasks(self):
+        return Task.objects.filter(task_list=self)
+    
 
-''' 
+class Task(models.Model):
+    done = models.BooleanField(default=False)
+    name = models.CharField(max_length=20)
+    task_list = models.ForeignKey(TaskList, null=True)
