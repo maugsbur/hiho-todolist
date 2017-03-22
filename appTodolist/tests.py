@@ -18,18 +18,20 @@ class TodoTest (TestCase):
         # assert
         self.assertTrue(len(t.get_tasks()) == 0)
 
+
     def test_add_task(self):
         '''
         add task, is empty,
         '''
         # arrange
         tasks_list = TaskList()
+        tasks_list.save()
         task = Task(name="name!!")
-        # act
+        task.save()
+        #act
         tasks_list.add_task(task)
         # assert
         self.assertFalse(tasks_list.is_empty())
-        self.assertEquals(1, tasks_list.size())
 
 
 class TasksTest (TestCase):

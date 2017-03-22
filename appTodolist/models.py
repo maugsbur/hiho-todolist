@@ -12,7 +12,7 @@ class TaskList(models.Model):
         return Task.objects.filter(task_list=self).count() < 1
     
     def add_task(self, new_task):
-        pass
+        self.task_set.add(new_task)
     
     def get_tasks(self):
         return Task.objects.filter(task_list=self)
