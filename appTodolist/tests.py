@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from appTodolist.models import Task, TaskList
 
 
@@ -76,3 +76,15 @@ class TasksTest (TestCase):
         task.complete()
         # assert
         self.assertTrue(task.done)
+        
+
+class TaskViewTest(TestCase):
+    
+    def test_view_task(self):
+        # arrange
+        client = Client()
+        # act
+        response = client.get('/tasks')
+        # assert
+        self.assertEquals(200, response.status_code)
+        
